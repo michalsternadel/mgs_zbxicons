@@ -1,5 +1,3 @@
-output/*
-sql/*
-statuses/*
-icons/*
+output/*.png
+sql/*.sql
 sources.svg
