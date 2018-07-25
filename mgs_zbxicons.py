@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: UTF8 -*-
 # mgs_zbxicons.py
 # Purpose: Generating icons with statuses for zabbix maps usage.
 # Version: 0.0.1
@@ -32,6 +33,11 @@ sizes = [
  '48, 48',
  '24, 24']
 
+if not os.path.exists('sql'):
+    os.makedirs('sql')
+if not os.path.exists('output'):
+    os.makedirs('output')
+
 insertFile = open('sql/insert.sql','w')
 insertFile.write("-- Zabbix MgS_Icons (c) Sternadel Michał 2018\n\r")
 updateFile = open('sql/update.sql','w')
@@ -51,7 +57,7 @@ for icon in os.listdir('icons'):
 		iwidth, iheight = i.size
 		i.save('output/'+icon.replace('.png', '_(')+str(iwidth)+').png')
 		with open('output/'+icon.replace('.png', '_(')+str(iwidth)+').png', 'rb') as f:
-			hexdata = (str(hexlify(f.read()), "utf-8"))
+			hexdata = str(hexlify(f.read())) #, "utf-8")
 			insertFile.write("insert into images (imageid, imagetype, name, image) SELECT COALESCE(MAX(imageid),0)+1, '1', '"+icon.replace('.png','')+"_("+str(iwidth)+")', x'"+hexdata+"' FROM images;\n\r")
 			updateFile.write("update images set image=x'"+hexdata+"' where name='"+icon.replace('.png','')+"_("+str(iwidth)+")';\n\r")
 			upgradeFile.write("insert into images (imageid, imagetype, name, image) SELECT COALESCE(MAX(imageid),0)+1, '1', '"+icon.replace('.png','')+"_("+str(iwidth)+")', x'"+hexdata+"' FROM images ON DUPLICATE KEY update image=x'"+hexdata+"';\n\r")
@@ -71,7 +77,7 @@ for icon in os.listdir('icons'):
 			iwidth, iheight = i.size
 			i.save('output/'+icon.replace('.png', '')+'-'+status.replace('.png','_(')+str(iwidth)+').png')
 			with open('output/'+icon.replace('.png', '')+'-'+status.replace('.png','_(')+str(iwidth)+').png', 'rb') as f:
-				hexdata = (str(hexlify(f.read()), "utf-8"))
+				hexdata = str(hexlify(f.read())) #, "utf-8")
 				insertFile.write("insert into images (imageid, imagetype, name, image) SELECT COALESCE(MAX(imageid),0)+1, '1', '"+icon.replace('.png','')+"-"+status.replace('.png','')+"_("+str(iwidth)+")', x'"+hexdata+"' FROM images;\n\r")
 				updateFile.write("update images set image=x'"+hexdata+"' where name='"+icon.replace('.png','')+"-"+status.replace('.png','')+"_("+str(iwidth)+")';\n\r")
 				upgradeFile.write("insert into images (imageid, imagetype, name, image) SELECT COALESCE(MAX(imageid),0)+1, '1', '"+icon.replace('.png','')+"-"+status.replace('.png','')+"_("+str(iwidth)+")', x'"+hexdata+"' FROM images ON DUPLICATE KEY update image=x'"+hexdata+"';\n\r")
