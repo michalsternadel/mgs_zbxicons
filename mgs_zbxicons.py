@@ -67,8 +67,7 @@ for icon in os.listdir('icons'):
 	for status in os.listdir('statuses'):
 		i = Image.open('icons/'+icon)
 		if status.replace('.png','') == 'DISABLED':
-				i=i.convert('LA')
-				print('Converting: '+icon)
+			i=i.convert('LA')
 		iwidth, iheight = i.size
 		s = Image.open('statuses/'+status)
 		swidth, sheight = s.size
