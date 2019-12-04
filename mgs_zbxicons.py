@@ -2,13 +2,13 @@
 # -*- coding: UTF8 -*-
 # mgs_zbxicons.py
 # Purpose: Generating icons with statuses for zabbix maps usage.
-# Version: 0.0.1
-# Date: 2018-04-24
+# Version: 0.0.2
+# Date: 2019-12-04
 # Author: Michal Sternadel <michal@sternadel.pl>
 # Licence: GPLv2
 
 # mgs_zbxicons.py - Zabbix icons creator and automate installer
-# Copyright (C) 2018 Michal Sternadel <michal@sternadel>
+# Copyright (C) 2018-2019 Michal Sternadel <michal@sternadel.pl>
 #
 # mgs_zbxicons.py is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -87,6 +87,10 @@ for icon in os.listdir('icons'):
 			f.close()
 		i.close()
 
+insertFile.write("update ids set nextid=(SELECT max(imageid)+1 from images) where table_name='images';")
+updateFile.write("update ids set nextid=(SELECT max(imageid)+1 from images) where table_name='images';")
+upgradeFile.write("update ids set nextid=(SELECT max(imageid)+1 from images) where table_name='images';")
+fixFile.write("update ids set nextid=(SELECT max(imageid)+1 from images) where table_name='images';")
 insertFile.close()
 updateFile.close()
 upgradeFile.close()

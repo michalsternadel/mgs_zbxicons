@@ -13,7 +13,7 @@ This repository includes some Tango-styled icons.
 
 1. Put your icons to "icons" directory. Filename (without png extensions) will preserve as Drop-down names of icons.
 2. Put your statuses to "statuses" directory.
-3. Run python ./mgs_zbxicons.py
+3. Run python3 ./mgs_zbxicons.py
 4. Transfer upgrade.sql to you zabbix mysql server.
 5. execute mysql -u root -p [your_zabbix_database] < ./upgrade.sql
 
