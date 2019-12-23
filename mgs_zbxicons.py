@@ -1,9 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: UTF8 -*-
 # mgs_zbxicons.py
 # Purpose: Generating icons with statuses for zabbix maps usage.
 # Version: 0.0.2
-# Date: 2019-12-04
+# Date: 2019-12-23
 # Author: Michal Sternadel <michal@sternadel.pl>
 # Licence: GPLv2
 
