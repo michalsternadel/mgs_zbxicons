@@ -1,9 +1,9 @@
 # mgs_zbxicons
-Zabbix maps icon generator.
+## _Zabbix maps icon generator._
 
 Tool for generating icon pack to use with Zabbix maps.
-It simply combines all png's from icons with all png's from status (default: DISABLED, ERROR, MAINTENANCE, OK) and saves them in output directory.
-Easy to install and update sql scripts are generated at sql directory.
+It simply combines all png's from icons directory with all png files from status directory (default statuses are: DISABLED, ERROR, MAINTENANCE, OK) and saves them in output directory.
+Can be installed by-hand or using generated SQL scripts on sql directory.
 
 This repository includes some Tango-styled icons.
 
@@ -11,13 +11,27 @@ This repository includes some Tango-styled icons.
 
 # Installation
 
-1. Put your icons to "icons" directory. Filename (without png extensions) will preserve as Drop-down names of icons.
-2. Put your statuses to "statuses" directory.
-3. Run python3 ./mgs_zbxicons.py
-4. Transfer upgrade.sql to you zabbix mysql server.
-5. execute mysql -u root -p [your_zabbix_database] < ./upgrade.sql
+1. mgs_zbxicons requires python3 with pillow libraries (PIL), install it with pip or your package manager
+```sh
+pip3 install -r requirements.txt
+```
+2. Put your icons to "icons" directory. Filename (without png extensions) will preserve as Drop-down names of icon.
+3. Put your statuses to "statuses" directory.
+4. To generate icons and sql scripts run:
+```sh
+python3 ./mgs_zbxicons.py
+```
+4. Transfer _mgs_zbxicons-mysql.sql_ or _mgs_zbxicons-psql.sql_ to you zabbix mysql/postgresql server.
+5. Execute:
+a) For mysql/mariadb backend:
+```sh
+mysql -u zabbix_user -h zabbix_dbhost -p zabbix_db < ./mgs_zbxicons-mysql.sql
+```
+b) For postgresql backend:
+```sh
+psql -h zabbix_dbhost -U zabbix_user zabbix_db -f mgs_zbxicons-psql.sql
+```
 
 # Updating
 
-Procedure is the same as above (Instalation procedure)
-
+Procedure is the same as instalation procedure.
