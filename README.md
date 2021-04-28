@@ -23,6 +23,7 @@ python3 ./mgs_zbxicons.py
 ```
 4. Transfer _mgs_zbxicons-mysql.sql_ or _mgs_zbxicons-psql.sql_ to you zabbix mysql/postgresql server.
 5. Execute:
+
 a) For mysql/mariadb backend:
 ```sh
 mysql -u zabbix_user -h zabbix_dbhost -p zabbix_db < ./mgs_zbxicons-mysql.sql
