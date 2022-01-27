@@ -15,15 +15,23 @@ This repository includes some Tango-styled icons.
 ```sh
 pip3 install -r requirements.txt
 ```
-2. Put your icons to "icons" directory. Filename (without png extensions) will preserve as Drop-down names of icon.
+2. Put your icons to "icons" directory or use already provided. Filename (without png extensions) will preserve as Drop-down names of icon.
 3. Put your statuses to "statuses" directory.
-4. To generate icons and sql scripts run:
+4. Check usage and all available options:
 ```sh
-python3 ./mgs_zbxicons.py
+python3 ./mgs_zbxicons -h
 ```
-4. Transfer _mgs_zbxicons-mysql.sql_ or _mgs_zbxicons-psql.sql_ to you zabbix mysql/postgresql server.
-5. Execute:
-
+5. To generate icons and sql scripts run:
+a) For mysql/mariadb backend:
+```sh
+python3 ./mgs_zbxicons.py -e mysql
+```
+b) For posgresql backend:
+```sh
+python3 ./mysql_zbxicons.py -e psql
+```
+6. Transfer _mgs_zbxicons-mysql.sql_ or _mgs_zbxicons-psql.sql_ to you zabbix mysql/postgresql server.
+7. Import generated sql files to database engine:
 a) For mysql/mariadb backend:
 ```sh
 mysql -u zabbix_user -h zabbix_dbhost -p zabbix_db < ./mgs_zbxicons-mysql.sql
