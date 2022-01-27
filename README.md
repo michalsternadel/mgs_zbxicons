@@ -22,20 +22,24 @@ pip3 install -r requirements.txt
 python3 ./mgs_zbxicons -h
 ```
 5. To generate icons and sql scripts run:
+
 a) For mysql/mariadb backend:
 ```sh
 python3 ./mgs_zbxicons.py -e mysql
 ```
+
 b) For posgresql backend:
 ```sh
 python3 ./mysql_zbxicons.py -e psql
 ```
 6. Transfer _mgs_zbxicons-mysql.sql_ or _mgs_zbxicons-psql.sql_ to you zabbix mysql/postgresql server.
 7. Import generated sql files to database engine:
+
 a) For mysql/mariadb backend:
 ```sh
 mysql -u zabbix_user -h zabbix_dbhost -p zabbix_db < ./mgs_zbxicons-mysql.sql
 ```
+
 b) For postgresql backend:
 ```sh
 psql -h zabbix_dbhost -U zabbix_user zabbix_db -f mgs_zbxicons-psql.sql
