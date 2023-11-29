@@ -2,13 +2,13 @@
 # -*- coding: UTF8 -*-
 # mgs_zbxicons.py
 # Purpose: Generating icons with statuses for zabbix maps usage.
-# Version: 0.0.4
-# Date: 2022-01-27
+# Version: 0.0.5
+# Date: 2023-11-29
 # Author: Michal Sternadel <michal@sternadel.pl>
 # Licence: GPLv2
 
 # mgs_zbxicons.py - Zabbix icons creator and automate installer
-# Copyright (C) 2018-2022 Michal Sternadel <michal@sternadel.pl>
+# Copyright (C) 2018-2023 Michal Sternadel <michal@sternadel.pl>
 #
 # mgs_zbxicons.py is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -46,7 +46,10 @@ def generate_icons(resolution, states):
 		for tsize in sizes:
 			if (resolution in tsize) or resolution == 'all':
 				tw,th=tsize.split(',')
-				i = i.resize((int(tw),int(th)), Image.Resampling.LANCZOS)
+				if not hasattr(Image, 'Resampling'):
+					i = i.resize((int(tw),int(th)), Image.ANTIALIAS)
+				else:
+					i = i.resize((int(tw),int(th)), Image.Resampling.LANCZOS)
 				iwidth, iheight = i.size
 				i.save('output/'+icon.replace('.png', '_(')+str(iwidth)+').png')
 		i.close()
@@ -66,7 +69,10 @@ def generate_icons(resolution, states):
 				for tsize in sizes:
 					if (resolution in tsize) or resolution == 'all':
 						tw,th=tsize.split(',')
-						i = i.resize((int(tw),int(th)), Image.Resampling.LANCZOS)
+						if not hasattr(Image, 'Resampling'):
+							i = i.resize((int(tw),int(th)), Image.ANTIALIAS)
+						else:
+							i = i.resize((int(tw),int(th)), Image.Resampling.LANCZOS)
 						iwidth, iheight = i.size
 						i.save('output/'+icon.replace('.png', '')+'-'+status.replace('.png','_(')+str(iwidth)+').png')
 				i.close()
@@ -77,10 +83,10 @@ def generate_query(engine):
 	    os.makedirs('sql')
 	if (engine=='mysql'):
 		sqlFile = open('sql/mgs_zbxicons-mysql.sql','w', encoding='utf-8')
-		sqlFile.write("-- Zabbix MgS_Icons (c) Sternadel Michał 2022\n\r")
+		sqlFile.write("-- Zabbix MgS_Icons (c) Sternadel Michał 2023\n\r")
 	if (engine=='psql'):
 		sqlFile = open('sql/mgs_zbxicons-psql.sql','w', encoding='utf-8')
-		sqlFile.write("-- Zabbix MgS_Icons (c) Sternadel Michał 2022\n\r")
+		sqlFile.write("-- Zabbix MgS_Icons (c) Sternadel Michał 2023\n\r")
 	
 	for icon in os.listdir('output'):
 		with open('output/'+icon, 'rb') as f:
