@@ -46,7 +46,7 @@ def generate_icons(resolution, states):
 		for tsize in sizes:
 			if (resolution in tsize) or resolution == 'all':
 				tw,th=tsize.split(',')
-				i = i.resize((int(tw),int(th)), Image.ANTIALIAS)
+				i = i.resize((int(tw),int(th)), Image.Resampling.LANCZOS)
 				iwidth, iheight = i.size
 				i.save('output/'+icon.replace('.png', '_(')+str(iwidth)+').png')
 		i.close()
@@ -66,7 +66,7 @@ def generate_icons(resolution, states):
 				for tsize in sizes:
 					if (resolution in tsize) or resolution == 'all':
 						tw,th=tsize.split(',')
-						i = i.resize((int(tw),int(th)), Image.ANTIALIAS)
+						i = i.resize((int(tw),int(th)), Image.Resampling.LANCZOS)
 						iwidth, iheight = i.size
 						i.save('output/'+icon.replace('.png', '')+'-'+status.replace('.png','_(')+str(iwidth)+').png')
 				i.close()
@@ -76,10 +76,10 @@ def generate_query(engine):
 	if not os.path.exists('sql'):
 	    os.makedirs('sql')
 	if (engine=='mysql'):
-		sqlFile = open('sql/mgs_zbxicons-mysql.sql','w')
+		sqlFile = open('sql/mgs_zbxicons-mysql.sql','w', encoding='utf-8')
 		sqlFile.write("-- Zabbix MgS_Icons (c) Sternadel Michał 2022\n\r")
 	if (engine=='psql'):
-		sqlFile = open('sql/mgs_zbxicons-psql.sql','w')
+		sqlFile = open('sql/mgs_zbxicons-psql.sql','w', encoding='utf-8')
 		sqlFile.write("-- Zabbix MgS_Icons (c) Sternadel Michał 2022\n\r")
 	
 	for icon in os.listdir('output'):
