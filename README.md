@@ -30,7 +30,7 @@ python3 ./mgs_zbxicons.py -e mysql
 
 b) For posgresql backend:
 ```sh
-python3 ./mysql_zbxicons.py -e psql
+python3 ./mgs_zbxicons.py -e psql
 ```
 6. Transfer _mgs_zbxicons-mysql.sql_ or _mgs_zbxicons-psql.sql_ to you zabbix mysql/postgresql server.
 7. Import generated sql files to database engine:
